@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 from model import TipCalculatorModel
 from view import TipCalculatorView
 from typing import Callable
-from __future__ import annotations
 
 class TipCalculatorController:
     """ The Controller class of the Tip Calculator application. It responds to
@@ -18,10 +19,10 @@ class TipCalculatorController:
         self.view.configure_tip_buttons(self)
 
 
-    def create_tip_handler(self, bill_amount: str, tip_amount: float) -> Callable[[], None]:
+    def create_tip_handler(self, get_bill_amount: Callable[[],str], tip_amount: float) -> Callable[[], None]:
         """ Returns a function that tells the controller to calculate the tip. """
         def tip_handler() -> None:
-            self.calculate(bill_amount, tip_amount)
+            self.calculate(get_bill_amount(), tip_amount)
 
         return tip_handler
 
