@@ -25,8 +25,9 @@ class TipCalculatorApp:
 
         # create the MVC objects:
         # 1. A TipCalculatorModel with the name model
-        # 2. A TipCalculatorController with the name controller
-        # 3. A TipCalculatorView with the name view
+        # 2. A TipCalculatorView with the name view
+        # 3. A TipCalculatorController with the name controller
+
 
         model = TipCalculatorModel("tip_log.txt") # create the model
         
