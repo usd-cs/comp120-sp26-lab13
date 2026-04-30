@@ -41,12 +41,11 @@ class TipCalculatorView(ttk.Frame):
     much else. """
 
     # instance variables
-    controller: TipCalculatorController  # the application controller
     bill_amount: ttk.Entry  # the text entry box for the bill amount
     ta_label: ttk.Label  # the label where the tip amount will be displayed
     message_label: ttk.Label  # the label where special messages will be displayed
 
-    def __init__(self, parent: tk.Tk, controller: TipCalculatorController) -> None:
+    def __init__(self, parent: tk.Tk) -> None:
         super().__init__(parent)
         self.create_layout()
 
