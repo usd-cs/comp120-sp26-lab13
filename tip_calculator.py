@@ -49,7 +49,6 @@ class TipCalculatorView(ttk.Frame):
     def __init__(self, parent: tk.Tk, controller: TipCalculatorController) -> None:
         super().__init__(parent)
         self.create_layout()
-        self.controller = controller
 
     def create_layout(self) -> None:
         """ Creates the grid-based layout. """
@@ -93,17 +92,17 @@ class TipCalculatorView(ttk.Frame):
         # TODO: use pack to place the two message labels
 
 
-    def create_tip_handler(self, tip_amount: float) -> Callable[[], None]:
-        """ Returns a function that tells the controller to calculate the tip. """
-        def tip_handler() -> None:
-            self.controller.calculate(self.bill_amount.get(), tip_amount)
+    def configure_tip_buttons(self, controller: TipCalculatorController) -> None:
+        """ Sets the 'command' attribute for all of the tip buttons using the
+        controller's create_tip_handler method. """
 
-        return tip_handler
+        pass # dummy implementation
 
 
     def show_message(self, message: str) -> None:
         """ Sets the text for the message label. """
         self.message_label['text'] = message
+
 
     def clear_message(self) -> None:
         """ Clears out the message label. """
@@ -131,15 +130,21 @@ class TipCalculatorController:
 
     # instance variables
     model: TipCalculatorModel  # the model that the controller should control
-    view: TipCalculatorView | None  # the view that the controller should control
+    view: TipCalculatorView  # the view that the controller should control
 
-    def __init__(self, model: TipCalculatorModel) -> None:
+    def __init__(self, model: TipCalculatorModel, view: TipCalculatorView) -> None:
         self.model = model
-        self.view = None
-
-    def set_view(self, view: TipCalculatorView) -> None:
-        """ Sets the view that this controller are controlling. """
         self.view = view
+        self.view.configure_tip_buttons(self)
+
+
+    def create_tip_handler(self, bill_amount: str, tip_amount: float) -> Callable[[], None]:
+        """ Returns a function that tells the controller to calculate the tip. """
+        def tip_handler() -> None:
+            self.calculate(bill_amount, tip_amount)
+
+        return tip_handler
+
 
     def calculate(self, bill_amount: str, tip_percent: float) -> None:
         """ Verifies that the bill amount is OK, then calculates the tip to be
@@ -150,8 +155,6 @@ class TipCalculatorController:
 
         Precondition: self.view has been set (is not None)
         """
-
-        assert self.view is not None, "view must be set"  # enforce the precondition
 
         # TODO: tell the view (self.view) to clear out any old message
 
@@ -202,8 +205,6 @@ class TipCalculatorApp:
 
         # TODO: place the view using the pack layout (it will be the only thing in
         # the main/top-level window)
-
-        # TODO: user the controller's set_view method to set up the view
 
 
     def start(self) -> None:
