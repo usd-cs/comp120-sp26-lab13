@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-from controller import TipCalculatorController
-
 class TipCalculatorView(ttk.Frame):
     """ The view class of the Tip Calculator application. It creates the GUI
     layout and responds to events and sends them to the controller, but not
@@ -12,6 +10,10 @@ class TipCalculatorView(ttk.Frame):
     bill_amount: ttk.Entry  # the text entry box for the bill amount
     ta_label: ttk.Label  # the label where the tip amount will be displayed
     message_label: ttk.Label  # the label where special messages will be displayed
+    tip0_button: ttk.Button # button for setting tip to 0%
+    tip15_button: ttk.Button # button for setting tip to 15%
+    tip20_button: ttk.Button # button for setting tip to 20%
+    tip25_button: ttk.Button # button for setting tip to 25%
 
     def __init__(self, parent: tk.Tk) -> None:
         super().__init__(parent)
@@ -39,12 +41,9 @@ class TipCalculatorView(ttk.Frame):
 
         # Create the buttons to indicate the amount needed.
         # These buttons should be placed inside the buttons_frame.
-        tip15_button = ttk.Button(buttons_frame, text='15% (Good)')
+        self.tip15_button = ttk.Button(buttons_frame, text='15% (Good)')
 
         # TODO: create the remaining 3 tip buttons (20, 25, and 0%)
-
-        # TODO: set the 'command' attribute for all of the buttons using the
-        # create_tip_handler method defined below.
 
         # TODO: Use the grid layout to place the tip percent buttons
 
@@ -63,7 +62,9 @@ class TipCalculatorView(ttk.Frame):
         """ Sets the 'command' attribute for all of the tip buttons using the
         controller's create_tip_handler method. """
 
-        pass # dummy implementation
+        self.tip0_button['command'] = controller.create_tip_handler(self.bill_amount.get, 0.0)
+        
+        # TODO: set the command for the other 3 buttons
 
 
     def show_message(self, message: str) -> None:
@@ -85,5 +86,8 @@ class TipCalculatorView(ttk.Frame):
 
         # TODO: implement this method (it only needs a single line of code)
         # Note that you should use an f-String to properly format the text for
-        # the tip amount label.
+        # the tip amount label (self.ta_label). The show_message method (above)
+        # may be a useful template for you.
         pass
+
+from controller import TipCalculatorController
