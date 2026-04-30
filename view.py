@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-from model import TipCalculatorModel
 from controller import TipCalculatorController
 
 class TipCalculatorView(ttk.Frame):
