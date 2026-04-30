@@ -24,8 +24,9 @@ class TipCalculatorView(ttk.Frame):
 
         # Create top-level frames
         input_frame = ttk.Frame(self)
+        buttons_frame = ttk.Frame(self)
 
-        # TODO: create two more frames named buttons_frame and messages_frame
+        # TODO: create another frame named messages_frame
 
         # TODO: use the pack method to place the the input, buttons, and
         # messages frames in a single column
