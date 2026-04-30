@@ -6,7 +6,8 @@ A Tkinter application to calculate tips.
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Callable, Optional
+from typing import Callable
+from __future__ import annotations
 
 
 class TipCalculatorModel:
@@ -40,12 +41,12 @@ class TipCalculatorView(ttk.Frame):
     much else. """
 
     # instance variables
-    controller: 'TipCalculatorController'  # the application controller
+    controller: TipCalculatorController  # the application controller
     bill_amount: ttk.Entry  # the text entry box for the bill amount
     ta_label: ttk.Label  # the label where the tip amount will be displayed
     message_label: ttk.Label  # the label where special messages will be displayed
 
-    def __init__(self, parent: tk.Tk, controller: 'TipCalculatorController') -> None:
+    def __init__(self, parent: tk.Tk, controller: TipCalculatorController) -> None:
         super().__init__(parent)
         self.create_layout()
         self.controller = controller
@@ -130,7 +131,7 @@ class TipCalculatorController:
 
     # instance variables
     model: TipCalculatorModel  # the model that the controller should control
-    view: Optional[TipCalculatorView]  # the view that the controller should control
+    view: TipCalculatorView | None  # the view that the controller should control
 
     def __init__(self, model: TipCalculatorModel) -> None:
         self.model = model
