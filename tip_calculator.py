@@ -31,7 +31,7 @@ class TipCalculatorApp:
 
         model = TipCalculatorModel("tip_log.txt") # create the model
         
-        # TODO: create the controller and view objects (2 and 3 from above)
+        # TODO: create the view and controller objects (2 and 3 from above)
         # Refer to the __init__ methods for these classes so you know what to
         # pass when creating them.
 
